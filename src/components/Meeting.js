@@ -8,8 +8,10 @@ class Meeting extends Component {
 
     render() {
 
-        let channel = "channelName1";
-
+        let channel = "2";
+        let localStream;
+        var audioIds =[];
+        var videoIds =[];
         // 创建一个客户端
         let client = AgoraRTC.createRtcClient();
         // console.log(AgoraRTC.createClient());
@@ -35,30 +37,24 @@ class Meeting extends Component {
                 console.log(devices);
                 console.log("**********************************");
 
-                var wushuang1 = [];
-                var wushuang2 = [];
-
                 for (let i = 0; i !== devices.length; ++i) {
                     let device = devices[i];
 
-                    // let option = document.createElement('option');
-                    // option.value = device.deviceId;
+                     let option = document.createElement('option');
+                     option.value = device.deviceId;
                     if (device.kind === 'audioinput') {
-                        // option.text = device.label || 'microphone ' + (audioSelect.length + 1);
-                        // audioSelect.appendChild(option);
-                        wushuang1.push(device.label);
+                         //option.text = device.label || 'microphone ' + (audioSelect.length + 1);
+                         //audioSelect.appendChild(option);
+                        audioIds[audioIds.length + 1] = device.deviceId;
 
                     } else if (device.kind === 'videoinput') {
-                        // option.text = device.label || 'camera ' + (videoSelect.length + 1);
-                        // videoSelect.appendChild(option);
-                        wushuang2.push(device.label);
+                         //option.text = device.label || 'camera ' + (videoSelect.length + 1);
+                         //videoSelect.appendChild(option);
+                        videoIds[videoIds.length + 1] = device.deviceId;
                     } else {
                         console.log('Some other kind of source/device: ', device);
                     }
                 }
-
-                console.log(wushuang1 + "8888888888888888888888888888888888+声音");
-                console.log(wushuang2 + "8888888888888888888888888888888888+画面");
             });
 
 
@@ -67,29 +63,38 @@ class Meeting extends Component {
 
                 console.log("User " + uid + " join channel successfully");
                 console.log("Timestamp: " + Date.now());
+                    if (localStream) {
+                        // local stream exist already
+                        client.unpublish(localStream, function(err) {
+                            console.log("Unpublish failed with error: ", err);
+                        });
+                        localStream.close();
+                    }
 
+                    localStream = AgoraRTC.createStream({
+                        streamID: uid,
+                        audio: true,
+                        cameraId: audioIds[0],
+                        microphoneId:  videoIds[0],
+                        video: true,
+                        screen: false
+                    });
 
-                let localStream = AgoraRTC.createStream({
-                    streamID: uid,
-                    audio: true,
-                    cameraId: videoSource.value,
-                    microphoneId: audioSource.value,
-                    video: true,
-                    screen: false
-                });
-
-                localStream.setVideoProfile("320P");
-                localStream.init(function () {
+                    localStream.setVideoProfile("320P");
+                    localStream.init(function () {
                     console.log("Get UserMedia successfully");
                     displayStream(localStream);
                     client.publish(localStream, function (err) {
                         console.log("Timestamp: " + Date.now());
                         console.log("Publish local stream error: " + err);
                     });
+                    client.on('stream-published',function(evt){
+                        console.log('本地流已经推上服务器');
+                    });
                 })
             });
         });
-
+        subscribe(client);
         return (
             <div>
                 <div id="div_device" className="panel panel-default">
@@ -104,17 +109,46 @@ class Meeting extends Component {
                 </div>
                 <p>meeting</p>
                 <input placeholder="roomNum"></input>
-                <div id="video-container-multiple">
-
-
+                <div id="parentNode" style={{height:"100px",width:"100px"}}>
+                </div>
+                <div id="remoteNode" style={{height:"100px",width:"100px"}}>
                 </div>
             </div>
         )
     }
 }
 
+//订阅同房间的另外的流
+function subscribe(client){
+    //有人发布流之后就触发
+    client.on('stream-added', function(evt) {
+        var stream = evt.stream;
+        console.log("New stream added: " + stream.getId());
+        console.log("Timestamp: " + Date.now());
+        console.log("Subscribe ", stream);
+        client.subscribe(stream, function(err) {
+            console.log("Subscribe stream failed", err);
+        });
+    });
+    //收到流之后
+    client.on('stream-subscribed', function(evt) {
+        var stream = evt.stream;
+        console.log("Got stream-subscribed event");
+        console.log("Timestamp: " + Date.now());
+        console.log("Subscribe remote stream successfully: " + stream.getId());
+        console.log(evt);
+        displayRemoteStream(stream);
+        //updateRoomInfo();
+    });
+
+}
+
 function displayStream(stream) {
-    stream.play("video-container-multiple")
+    stream.play("parentNode")
+}
+
+function displayRemoteStream(stream){
+    stream.play("remoteNode");
 }
 
 export default Meeting;
