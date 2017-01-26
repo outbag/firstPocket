@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Router, Route, Link } from 'react-router';
 import { render } from 'react-dom';
 import ClassRoomVideo from './classRoomVideo/classRoomVideo';
+import WhiteBoardIndex from './classRoomWhiteBoard/whiteboardindex';
 
 class hello extends Component {
 
@@ -29,6 +30,7 @@ class hello extends Component {
                     uid={uid}
                     profession={profession}
                     />
+                <WhiteBoardIndex/>
             </div>
         )
     }
