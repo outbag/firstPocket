@@ -1,13 +1,12 @@
 import React, {Component, PropTypes} from 'react'
 import {render} from 'react-dom'
 
-class Meeting extends Component {
+class classVideo extends Component {
 
 
     render() {
 
-
-        let channel = "channelName1";
+        let channel = "123";
         let localStream;
         let key = "b7c2835c0fc941e480664d982f9dd88a";
 
@@ -46,7 +45,7 @@ class Meeting extends Component {
                     local: true
                 });
 
-                localStream.setVideoProfile('480P_6');
+                localStream.setVideoProfile('360P_10');
                 localStream.init(function () {
                     console.log("Get UserMedia successfully");
                     displayStream(localStream);
@@ -61,9 +60,12 @@ class Meeting extends Component {
         });
         subscribe(client);
         return (
-            <div>
-                <div id="parentNode" style={{height: "300px", width: "300px"}}></div>
-                <div id="remoteNode" style={{height: "300px", width: "300px"}}></div>
+            <div className="class-room">
+                <div id="localView" className="local-view" ></div>
+                <div className="remote-view-box">
+                    <div id="remoteView" className="remote-view"></div>
+                </div>
+
             </div>
         )
     }
@@ -96,11 +98,11 @@ function subscribe(client) {
 }
 
 function displayStream(stream) {
-    stream.play("parentNode")
+    stream.play("localView")
 }
 
 function displayRemoteStream(stream) {
-    stream.play("remoteNode");
+    stream.play("remoteView");
 }
 
-export default Meeting;
+export default classVideo;
