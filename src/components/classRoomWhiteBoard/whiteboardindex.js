@@ -14,8 +14,8 @@ export default class WhiteBoardIndex extends Component {
                         width:'800px',
                         height: '800px'
                     }}
-                >
-                </WhiteBoard>
+                />
+
             </div>
         )
     }

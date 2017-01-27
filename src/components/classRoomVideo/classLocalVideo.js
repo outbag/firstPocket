@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import {render} from 'react-dom'
+import React, {Component, PropTypes} from 'react';
+import {render} from 'react-dom';
+import AgoraRTC from './AgoraRTCSDK-1.8.0';
 
 class classLocalVideo extends Component {
 
@@ -15,17 +16,17 @@ class classLocalVideo extends Component {
 
     }
 
+
+
     initLocalStream(client,uid){
 
         let localStream;
         //建立一条本地的流
         localStream = AgoraRTC.createStream({
             streamID: uid,
-            audio: false,
+            audio: true,
             video: true,
-            screen: false,
-            local: true
-
+            screen: false
         });
 
         //设置本地一条流的规格
@@ -44,8 +45,6 @@ class classLocalVideo extends Component {
                 console.log('本地流已经推上服务器');
             });
 
-            // this.setState({test: localStream});
-            //把流 preview 出来
             localStream.play("localView")
         });
     }

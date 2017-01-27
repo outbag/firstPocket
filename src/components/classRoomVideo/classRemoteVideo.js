@@ -28,28 +28,28 @@ class classRemoteVideo extends Component {
             stream.play("remoteView");
         });
 
-        //监听用户离开的回调
-        // client.on('peer-leave', function(evt) {
-        //     let uid = evt.uid;
-        //     log("remote user left", uid);
-        //     alert("监听到"+ uid +"离开")
-        //
-        // });
-        //
-        // client.on("stream-removed", function(evt) {
-        //     let stream = evt.stream;
-        //     alert(2);
-        // });
-        //
-        // client.on("peer-mute-video", function (event) {
-        //
-        //     let message = event.msg;
-        //     if (message.muted) {
-        //         console.log("remote user " + message.uid + " muted video");
-        //     } else {
-        //         console.log("remote user " + message.uid + " unmuted video");
-        //     }
-        // })
+        // 监听用户离开的回调
+        client.on('peer-leave', function(evt) {
+            let uid = evt.uid;
+            log("remote user left", uid);
+            alert("监听到"+ uid +"离开")
+
+        });
+
+        client.on("stream-removed", function(evt) {
+            let stream = evt.stream;
+            alert(2);
+        });
+
+        client.on("peer-mute-video", function (event) {
+
+            let message = event.msg;
+            if (message.muted) {
+                console.log("remote user " + message.uid + " muted video");
+            } else {
+                console.log("remote user " + message.uid + " unmuted video");
+            }
+        })
     }
 
     render() {
