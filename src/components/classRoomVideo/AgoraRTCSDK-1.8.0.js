@@ -664,7 +664,7 @@ AgoraRTC.sessionId = 103;
 AgoraRTC.Connection = function (c) {
     var a = {};
     c.session_id = AgoraRTC.sessionId += 1;
-    if ("undefined" !== typeof module && module.exports)L.Logger.error("Publish/subscribe video/audio streams not supported yet"), a = AgoraRTC.FcStack(c); else if (null !== window.navigator.userAgent.match("Firefox"))a.browser = "mozilla", a = AgoraRTC.FirefoxStack(c); else if (window.navigator.userAgent.indexOf("Safari"))L.Logger.debug("Safari"), a = AgoraRTC.ChromeStableStack(c), a.browser = "safari"; else if (window.navigator.userAgent.indexOf("MSIE "))L.Logger.debug("IE"), a =
+    if (null !== window.navigator.userAgent.match("Firefox"))a.browser = "mozilla", a = AgoraRTC.FirefoxStack(c); else if (window.navigator.userAgent.indexOf("Safari"))L.Logger.debug("Safari"), a = AgoraRTC.ChromeStableStack(c), a.browser = "safari"; else if (window.navigator.userAgent.indexOf("MSIE "))L.Logger.debug("IE"), a =
         AgoraRTC.ChromeStableStack(c), a.browser = "ie"; else if (26 <= window.navigator.appVersion.match(/Chrome\/([\w\W]*?)\./)[1])L.Logger.debug("Stable"), a = AgoraRTC.ChromeStableStack(c), a.browser = "chrome-stable"; else if (40 <= window.navigator.userAgent.toLowerCase().indexOf("chrome"))L.Logger.debug("Canary!"), a = AgoraRTC.ChromeCanaryStack(c), a.browser = "chrome-canary"; else throw a.browser = "none", "WebRTC stack not available";
     return a
 };
@@ -1790,7 +1790,7 @@ AgoraRTC.Client = function (c) {
     };
     d.publish = function (a, c, e) {
         if ("object" !== typeof a || null === a)b(e, d.errorCodes.INVALID_LOCAL_STREAM), L.Logger.info("Err: invalid local stream");
-        else if (null === a.stream && void 0 === a.url)b(e, d.errorCodes.INVALID_LOCAL_STREAM), L.Logger.info("Err: invalid local stream"); else if (2 !== d.state)b(e, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: user not in the session"); else if (c = a.getAttributes() || {}, a.local && void 0 === d.localStreams[a.getId()] && (a.hasAudio() || a.hasVideo() || a.hasScreen()))void 0 !== a.url ? g("publish", {
+        else if (null === a.stream && void 0 === a.url)b(e, d.errorCodes.INVALID_LOCAL_STREAM), L.Logger.info("Err: invalid local stream"); else if (2 !== d.state)b(e, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: 4user not in the session"); else if (c = a.getAttributes() || {}, a.local && void 0 === d.localStreams[a.getId()] && (a.hasAudio() || a.hasVideo() || a.hasScreen()))void 0 !== a.url ? g("publish", {
             state: "url",
             audio: a.hasAudio(),
             video: a.hasVideo(),
@@ -1879,7 +1879,7 @@ AgoraRTC.Client = function (c) {
     };
     d.unpublish = function (a, c) {
         "object" !== typeof a || null ===
-        a ? (b(c, d.errorCodes.INVALID_LOCAL_STREAM), L.Logger.info("Err: invalid local stream")) : 2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: user not in the session")) : (void 0 != d.timers[a.getId()] && clearInterval(d.timers[a.getId()]), void 0 !== d.socket ? a.local && void 0 !== d.localStreams[a.getId()] ? (delete d.localStreams[a.getId()], f("unpublish", a.getId(), function (e) {
+        a ? (b(c, d.errorCodes.INVALID_LOCAL_STREAM), L.Logger.info("Err: invalid local stream")) : 2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: 3user not in the session")) : (void 0 != d.timers[a.getId()] && clearInterval(d.timers[a.getId()]), void 0 !== d.socket ? a.local && void 0 !== d.localStreams[a.getId()] ? (delete d.localStreams[a.getId()], f("unpublish", a.getId(), function (e) {
             if ("error" === e)b(c, d.errorCodes.UNPUBLISH_STREAM_FAILED), L.Logger.info("Err: unpublish stream failed"); else {
                 if ((a.hasAudio() ||
                     a.hasVideo() || a.hasScreen()) && void 0 === a.url && void 0 !== a.pc)a.pc.close(), a.pc = void 0;
@@ -1896,7 +1896,7 @@ AgoraRTC.Client = function (c) {
     };
     d.subscribe = function (a, c) {
         "object" !== typeof a || null === a ? (b(c, d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) :
-            2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: user not in the session")) : a.local ? (b(c, d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : a.hasAudio() || a.hasVideo() || a.hasScreen() ? (a.pc = AgoraRTC.Connection({
+            2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: 1user not in the session")) : a.local ? (b(c, d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : a.hasAudio() || a.hasVideo() || a.hasScreen() ? (a.pc = AgoraRTC.Connection({
                 callback: function (e) {
                     g("subscribe", {streamId: a.getId(), audio: !0, video: !0, mode: d.mode}, e, function (e) {
                         "error" === e ? (b(c, d.errorCodes.SUBSCRIBE_STREAM_FAILED), L.Logger.info("Err: subscribe failed, closing stream ", a.getId()), a.close()) : a.pc.processSignalingMessage(e)
@@ -1961,7 +1961,7 @@ AgoraRTC.Client = function (c) {
     };
     d.unsubscribe = function (a, c) {
         "object" !== typeof a || null === a ? (b(c,
-            d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : 2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: user not in the session")) : (void 0 != d.timers[a.getId()] && clearInterval(d.timers[a.getId()]), void 0 !== d.socket ? a.local ? (b(c, d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : f("unsubscribe", a.getId(), function (e) {
+            d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : 2 !== d.state ? (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: 2user not in the session")) : (void 0 != d.timers[a.getId()] && clearInterval(d.timers[a.getId()]), void 0 !== d.socket ? a.local ? (b(c, d.errorCodes.INVALID_REMOTE_STREAM), L.Logger.info("Err: invalid remote stream")) : f("unsubscribe", a.getId(), function (e) {
                 "error" === e ? (b(c, d.errorCodes.UNSUBSCRIBE_STREAM_FAILED), L.Logger.info("Err: unsubscribe stream failed")) : a.close()
             },
             c) : (b(c, d.errorCodes.INVALID_OPERATION), L.Logger.info("Err: no socket available")))

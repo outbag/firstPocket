@@ -11,7 +11,7 @@ class hello extends Component {
         this.state = {
             channel:"123",
             AppKey:"b7c2835c0fc941e480664d982f9dd88a",
-            uid:12112121212121,
+            uid:23333333,
             profession:"teacher"
         }
     }

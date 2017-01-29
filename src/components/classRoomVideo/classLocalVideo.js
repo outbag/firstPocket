@@ -30,7 +30,7 @@ class classLocalVideo extends Component {
         });
 
         //设置本地一条流的规格
-        localStream.setVideoProfile('480P_3');
+        localStream.setVideoProfile('120P_1');
 
         //初始化本地的流
         localStream.init(function () {
