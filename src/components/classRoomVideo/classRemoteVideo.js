@@ -4,6 +4,7 @@ import {render} from 'react-dom'
 class classRemoteVideo extends Component {
 
     componentDidMount(){
+
     }
 
     classRoomStatus(client){
