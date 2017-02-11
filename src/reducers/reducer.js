@@ -7,7 +7,7 @@ const initState = {
     time:'7', // 持续时间20ms
     data:"",
     text:""
-}
+};
 
 export default function changeColor(state= initState,action){
     switch(action.type){
@@ -17,7 +17,7 @@ export default function changeColor(state= initState,action){
                 color:'green',
                 time:'7',
                 data:action.data
-            })
+            });
 
         case CHANGE_BLUE:
             return Object.assign({}, state, {
@@ -25,16 +25,16 @@ export default function changeColor(state= initState,action){
                 color:'blue',
                 time:'7',
                 data:"blue"
-            })
+            });
         case CHANGE_BLACK:
             return Object.assign({}, state, {
                 text : changeBlack(state,action)
-            })
+            });
         case CHANGE_WORLD:
             return  Object.assign({},state,{
                 initCounter:4,
                 text:"change world!"
-            })
+            });
         default:
             return state
     }

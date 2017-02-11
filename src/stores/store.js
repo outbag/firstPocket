@@ -9,7 +9,7 @@ const createStoreWithMiddleware = compose(
         thunk
     ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore)
+)(createStore);
 
 export default function configureStore(initialState) {
     const store = createStoreWithMiddleware(reducer, initialState)

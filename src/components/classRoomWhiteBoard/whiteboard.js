@@ -20,7 +20,7 @@ export default class WhiteBoard extends Component {
 
     render() {
         return (
-            <div style={this.props.style} id="aww-wrapper" ref="aww">
+            <div style={this.props.style}  ref="aww">
             </div>
         )
     }

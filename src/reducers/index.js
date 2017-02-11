@@ -7,6 +7,6 @@ import reducerBlack from './reducerBlack'
 const rootReducer = combineReducers({
   reducer,
   reducerBlack
-})
+});
 
 export default rootReducer

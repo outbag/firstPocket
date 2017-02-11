@@ -2,7 +2,7 @@
  * Created by buhe on 2017/1/25.
  */
 import React, {Component, PropTypes} from 'react';
-import WhiteBoard from './whiteboard';
+import WhiteBoard from './WhiteBoard';
 export default class WhiteBoardIndex extends Component {
     render() {
         return (
