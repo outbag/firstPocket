@@ -70,8 +70,9 @@ class RemoteVideo extends Component {
         });
 
         return (
-            <div >
+            <div className="class-media-remote-frame">
                 { trueArray }
+                <div className="class-media-remote-end-float"></div>
             </div>
         )
     }

@@ -13,8 +13,8 @@ class RemoteVideoChildren extends Component {
     render() {
         let uid = this.props.uid;
         return (
-            <div >
-                <div id={"remoteView"+uid} className="video-view" ></div>
+            <div>
+                <div id={"remoteView"+uid}  className="class-media-remote-view"></div>
             </div>
         )
     }

@@ -1,15 +1,61 @@
-.video-index{
-  width: 400px;
-  height: 400px;
-  background-color: yellow;
-}
-
-.video-view{
-  width: 200px;
-  height: 200px;
-  float: left;
-}
-
 .class1{
   display: none;
+}
+/*播放页面css*/
+body{
+  margin:0px;
+}
+.container{
+  width:100vw;
+  height:100vh;
+  background-color: #ffffff;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:horizontal;
+  -webkit-box-orient:horizontal;
+  box-orient:horizontal;
+}
+.white-board-frame{
+  -moz-box-flex:1;
+  -webkit-box-flex:1;
+  box-flex:1;
+}
+.video-index{
+  width:300px;
+  background-color: yellow;
+}
+.video-view{
+  height:200px;
+}
+.class-media{
+  height:100%;
+  width:300px;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:vertical;
+  -webkit-box-orient:vertical;
+  box-orient:vertical;
+}
+.class-media-contorl-panel{
+  height:100px;
+  background-color: aliceblue;
+}
+.class-media-remote-frame{
+  background-color: black;
+}
+.class-media-remote-view{
+  float:left;
+  width:75px;
+  height:50px;
+}
+.class-media-remote-end-float{
+  clear:both;
+}
+.class-media-chat-frame{
+  background-color: gray;
+  -moz-box-flex:1;
+  -webkit-box-flex:1;
+  box-flex:1;
 }

@@ -3,10 +3,13 @@ import {render} from 'react-dom';
 import RemoteVideo from './RemoteVideo';
 import AgoraRTC from './AgoraRTCSDK-1.8.0';
 
-let channel = "channelName2";
+let channel = "123";
 let AppKey = "b7c2835c0fc941e480664d982f9dd88a";
 let client = AgoraRTC.createLiveClient();
 let uid = 2333333333;
+let disableAudio = false;
+let disableVideo = false;
+let localStream;
 
 class VideoIndex extends Component {
 
@@ -25,7 +28,7 @@ class VideoIndex extends Component {
             console.log("AgoraRTC client initialized");
             client.join(channel, uid, function(uid) {
 
-                let localStream = AgoraRTC.createStream({
+                localStream = AgoraRTC.createStream({
                     streamID: uid,
                     audio: true,
                     // cameraId: videoSource.value, // 可选
@@ -58,13 +61,32 @@ class VideoIndex extends Component {
             });
         });
     }
-
+    toggleVideo(){
+        disableVideo = !disableVideo;
+        if (disableVideo == true){
+            localStream.disableVideo();
+        }else {
+            localStream.enableVideo();
+        }
+    }
+    toggleAudio(){
+        disableAudio = !disableAudio;
+        if (disableAudio == true){
+            localStream.disableAudio();
+        }else {
+            localStream.enableAudio();
+        }
+    }
     render() {
 
         return (
             <div className="video-index">
                 <div id="localView" className="video-view" ></div>
                 <RemoteVideo client={ client } uid={ uid }/>
+                <div className="class-media-contorl-panel">
+                    <button id="teacherToggleVideoBtn" onClick={this.toggleVideo}>视频开关</button>
+                    <button id="teacherToggleAudioBtn" onClick={this.toggleAudio}>音频开关</button>
+                </div>
             </div>
         )
     }
