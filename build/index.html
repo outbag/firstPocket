@@ -6,8 +6,21 @@
 </head>
 <body>
     <div id = "content"></div>
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBdakWODQG0ljLGlmFZ_7MaRMsvq9-NmMo",
+            authDomain: "outbag-c4be8.firebaseapp.com",
+            databaseURL: "https://outbag-c4be8.firebaseio.com",
+            storageBucket: "outbag-c4be8.appspot.com",
+            messagingSenderId: "891062308681"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="socket.io.js"></script>
     <script src="vendor-bundle.js"></script>
     <script src="index.js"></script>
+
 </body>
 </html>

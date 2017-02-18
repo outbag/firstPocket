@@ -18,11 +18,11 @@ class RemoteVideo extends Component {
     componentDidMount() {
 
         let client = this.props.client;
-
+        let closeVideo = this.props.closeVideo;
+        let getStream = this.props.getStream;
         // 有流加入时监听
         client.on('stream-added', function (evt) {
             let stream = evt.stream;
-
             client.subscribe(stream, function (err) {
                 console.log("Subscribe stream failed", err);
             });
@@ -33,11 +33,20 @@ class RemoteVideo extends Component {
         client.on('stream-subscribed', (evt) => {
                 let stream = evt.stream;
                 let uid = nextId++;
-                console.log(evt);
-
+                //用户身份是教师就显示在主窗口,并将本地流放入小窗口
+                //用户id只能用整数，这里需要进行数据库的查询
                 let myArray = this.state.array;
-                myArray = [...myArray, {stream, uid}];
-
+                if(stream.getId() == 110){
+                    var localStream = getStream();
+                    console.log('/////////////////////////////////////////////');
+                    console.log(localStream);
+                    console.log('/////////////////////////////////////////////');
+                    closeVideo.close();
+                    //stream.play("mainView");
+                    myArray = [...myArray, {localStream, uid}];
+                }else{
+                    myArray = [...myArray, {stream, uid}];
+                }
                 this.setState({
                     array: myArray
                 });
@@ -70,9 +79,9 @@ class RemoteVideo extends Component {
         });
 
         return (
-            <div className="class-media-remote-frame">
+            <div className="class-media-sub-view-frame">
                 { trueArray }
-                <div className="class-media-remote-end-float"></div>
+                <div className="class-media-end-float"></div>
             </div>
         )
     }

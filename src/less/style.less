@@ -42,20 +42,114 @@ body{
   height:100px;
   background-color: aliceblue;
 }
-.class-media-remote-frame{
+.class-media-sub-view-frame{
   background-color: black;
 }
-.class-media-remote-view{
+.class-media-sub-view{
   float:left;
   width:75px;
   height:50px;
 }
-.class-media-remote-end-float{
+.class-media-end-float{
   clear:both;
 }
+
+
+/*聊天框*/
 .class-media-chat-frame{
-  background-color: gray;
+  background-color: #f3f3f3;
   -moz-box-flex:1;
   -webkit-box-flex:1;
   box-flex:1;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:vertical;
+  -webkit-box-orient:vertical;
+  box-orient:vertical;//垂直排列
+}
+.class-media-chat-input-frame{
+  background-color: blueviolet;
+  height:50px;
+  width:100%;
+}
+.class-media-message-input{
+  width:60%;
+}
+.class-media-message-display-frame{
+  -moz-box-flex:1;
+  -webkit-box-flex:1;
+  box-flex:1;
+  width:100%;
+  padding:8px;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:vertical;
+  -webkit-box-orient:vertical;
+  box-orient:vertical;
+  overflow: scroll;
+
+}
+/*chat bubble*/
+.class-media-chat-bubble{
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:horizontal;
+  -webkit-box-orient:horizontal;
+  box-orient:horizontal;
+  background:#f3f3f3;
+  border-bottom: 1px solid #bbbbbb;
+}
+.class-media-chat-bubble-left-frame{
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  width:50px;
+  -webkit-box-pack:center;
+  -moz-box-pack: center;
+  -ms-flex-pack:center;
+}
+.class-media-chat-bubble-head-icon{
+  margin:20%;
+  width:60%;
+  border-radius: 50px;
+}
+.class-media-chat-bubble-right-frame{
+  -moz-box-flex:1;
+  -webkit-box-flex:1;
+  box-flex:1;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -moz-box-orient:vertical;
+  -webkit-box-orient:vertical;
+  box-orient:vertical;
+}
+.class-media-chat-bubble-content-frame {
+  -moz-box-flex:1;
+  -webkit-box-flex:1;
+  box-flex:1;
+}
+.class-media-chat-bubble-content{
+  margin:5px;
+  word-wrap:break-word;
+}
+.class-media-chat-bubble-name-frame{
+  width:100%;
+  height:30px;
+  display:-moz-box;
+  display:-webkit-box;
+  display:box;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack:center;
+}
+.class-media-chat-bubble-name{
+  font-style: italic;
+  font-size:12px;
+  color:cadetblue;
+  width:100%;
+  margin:5px;
 }

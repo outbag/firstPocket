@@ -5,17 +5,19 @@ import VideoIndex from './classroomvideo/VideoIndex';
 import ChatComponent from './classRoomIM/ChatComponent'
 
 class Meeting extends Component {
-    componentDidMount() {
-
+    componentWillMount(){
+        this.setState({
+            role:"teacher"
+        });
     }
 
     render() {
         return (
             <div className="container">
-                <WhiteBoardIndex/>
+                <WhiteBoardIndex role={this.state.role}/>
                 <div className="class-media">
-                    <VideoIndex/>
-                    <ChatComponent/>
+                    <VideoIndex role={this.state.role}/>
+                    <ChatComponent role={this.state.role}/>
                 </div>
             </div>
         )
